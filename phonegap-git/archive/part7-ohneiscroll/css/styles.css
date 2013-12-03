@@ -198,8 +198,3 @@ h2 {
     left: 0px;
     right: 0px;     
 }
-
-li>a.tappable-active {
-    color: #fff;
-    background-color: #4286f5;
-}
