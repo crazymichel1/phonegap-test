@@ -16,7 +16,7 @@ var app = {
     initialize: function() {
         var self = this;
         this.store = new MemoryStore(function() {
-            self.renderIframe();
+            self.renderHomeView();
         });
     },
     
@@ -29,22 +29,29 @@ var app = {
     },
     
     renderHomeView: function () {
-        var html = '<div class="header"><h1>Home</h1></div>' +
+        var self = this;
+        var html = '<div class="header"><h1>Homfdf</h1></div>' +
+                   '<div><input id="tstbutton" value="test" type="button"></input></div>' + 
                    '<div class="search-view">' +
                    '<input class="search-key" type="text"/>' +
                    '<ul class="employee-list"></ul>' +
                    '</div>';
         $('body').html(html);
         $('.search-key').on('keyup', $.proxy(this.findByName, this));
+        $('#tstbutton').click(function () {
+            self.renderSecondView();
+        });
     },
     
-    renderIframe: function () {
-        var html = '<iframe src="https://studip.serv.uni-osnabrueck.de/plugins.php/studipmobile" width="100%" height="100%" name="website"></iframe>';
+    renderSecondView: function () {
+        var html = '<div class="header"><h1>Test</h1></div>' +
+                   '<div class="search-view">' +
+                   '<input class="search-key" type="text"/>' +
+                   '<ul class="employee-list"></ul>' +
+                   '</div>';
         $('body').html(html);
         $('.search-key').on('keyup', $.proxy(this.findByName, this));
     }
-    
-    
 
 };
 

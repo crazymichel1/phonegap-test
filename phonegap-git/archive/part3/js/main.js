@@ -15,9 +15,10 @@ var app = {
 
     initialize: function() {
         var self = this;
-        this.store = new MemoryStore(function() {
-            self.renderIframe();
+        this.store = new WebSqlStore(function() {
+            self.showAlert('hi!', 'Information');
         });
+        $('.search-key').on('keyup', $.proxy(this.findByName, this));
     },
     
     showAlert: function(message, title) {
@@ -26,25 +27,7 @@ var app = {
         } else {
             alert(title ? (title + ": " + message) : message);                
         }
-    },
-    
-    renderHomeView: function () {
-        var html = '<div class="header"><h1>Home</h1></div>' +
-                   '<div class="search-view">' +
-                   '<input class="search-key" type="text"/>' +
-                   '<ul class="employee-list"></ul>' +
-                   '</div>';
-        $('body').html(html);
-        $('.search-key').on('keyup', $.proxy(this.findByName, this));
-    },
-    
-    renderIframe: function () {
-        var html = '<iframe src="https://studip.serv.uni-osnabrueck.de/plugins.php/studipmobile" width="100%" height="100%" name="website"></iframe>';
-        $('body').html(html);
-        $('.search-key').on('keyup', $.proxy(this.findByName, this));
     }
-    
-    
 
 };
 

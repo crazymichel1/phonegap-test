@@ -16,7 +16,7 @@ var app = {
     initialize: function() {
         var self = this;
         this.store = new MemoryStore(function() {
-            self.renderIframe();
+            self.renderHomeView();
         });
     },
     
@@ -36,15 +36,7 @@ var app = {
                    '</div>';
         $('body').html(html);
         $('.search-key').on('keyup', $.proxy(this.findByName, this));
-    },
-    
-    renderIframe: function () {
-        var html = '<iframe src="https://studip.serv.uni-osnabrueck.de/plugins.php/studipmobile" width="100%" height="100%" name="website"></iframe>';
-        $('body').html(html);
-        $('.search-key').on('keyup', $.proxy(this.findByName, this));
     }
-    
-    
 
 };
 
