@@ -15,6 +15,7 @@ var app = {
             // ... if yes: register touch event listener to change the "selected" state of the item
             $('body').on('touchstart', 'a', function(event) {
                 $(event.target).addClass('tappable-active');
+                navigator.notification.vibrate(1000);
             });
             $('body').on('touchend', 'a', function(event) {
                 $(event.target).removeClass('tappable-active');
