@@ -2,9 +2,9 @@ var app = {
 
     initialize: function() {
         var self = this;
-        this.detailsURL = /^#members\/(\d{1,})/;
+        this.detailsURL = /^#employees\/(\d{1,})/;
         this.registerEvents();
-        this.store = new WebSqlStore(function() {
+        this.store = new MemoryStore(function() {
             self.route();
         });
     },
@@ -47,8 +47,8 @@ var app = {
         }
         var match = hash.match(this.detailsURL);
         if (match) {
-            this.store.findById(Number(match[1]), function(member) {
-                self.slidePage(new MemberDetailView(member).render());
+            this.store.findById(Number(match[1]), function(employee) {
+                self.slidePage(new EmployeeView(employee).render());
             });
         }
     },

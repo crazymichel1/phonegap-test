@@ -1,24 +1,25 @@
-var MemoryStore = function(successCallback, errorCallback) {
+var LocalStorageStore = function(successCallback, errorCallback) {
 
     this.findByName = function(searchKey, callback) {
-        var members = this.members.filter(function(element) {
+        var employees = JSON.parse(window.localStorage.getItem("employees"));
+        var results = employees.filter(function(element) {
             var fullName = element.firstName + " " + element.lastName;
             return fullName.toLowerCase().indexOf(searchKey.toLowerCase()) > -1;
         });
-        callLater(callback, members);
+        callLater(callback, results);
     }
 
     this.findById = function(id, callback) {
-        var members = this.members;
-        var member = null;
-        var l = members.length;
+        var employees = JSON.parse(window.localStorage.getItem("employees"));
+        var employee = null;
+        var l = employees.length;
         for (var i=0; i < l; i++) {
-            if (members[i].id === id) {
-                member = members[i];
+            if (employees[i].id === id) {
+                employee = employees[i];
                 break;
             }
         }
-        callLater(callback, member);
+        callLater(callback, employee);
     }
 
     // Used to simulate async calls. This is done to provide a consistent interface with stores (like WebSqlStore)
@@ -31,9 +32,9 @@ var MemoryStore = function(successCallback, errorCallback) {
         }
     }
 
-    this.members = [
-            {"id": 1, "firstName": "Susi", "lastName": "Sorglos", "title":"Mitarbeiterin Kinderbetreuung", "managerId": 0, "city":"New York, NY", "cellPhone":"+49 157 944 999 12", "email":"susi.sorglos@arcor.net"},
-            {"id": 2, "firstName": "Michael", "lastName": "Köhler", "title":"Vorstand", "managerId": 1, "city":"Scranton, PA", "cellPhone":"570-865-2536", "officePhone":"570-123-4567", "email":"michael@dundermifflin.com"},
+    var employees = [
+            {"id": 1, "firstName": "Ryan", "lastName": "Howard", "title":"Vice President, North East", "managerId": 0, "city":"New York, NY", "cellPhone":"212-999-8888", "officePhone":"212-999-8887", "email":"ryan@dundermifflin.com"},
+            {"id": 2, "firstName": "Michael", "lastName": "Scott", "title":"Regional Manager", "managerId": 1, "city":"Scranton, PA", "cellPhone":"570-865-2536", "officePhone":"570-123-4567", "email":"michael@dundermifflin.com"},
             {"id": 3, "firstName": "Dwight", "lastName": "Schrute", "title":"Assistant Regional Manager", "managerId": 2, "city":"Scranton, PA", "cellPhone":"570-865-1158", "officePhone":"570-843-8963", "email":"dwight@dundermifflin.com"},
             {"id": 4, "firstName": "Jim", "lastName": "Halpert", "title":"Assistant Regional Manager", "managerId": 2, "city":"Scranton, PA", "cellPhone":"570-865-8989", "officePhone":"570-968-5741", "email":"dwight@dundermifflin.com"},
             {"id": 5, "firstName": "Pamela", "lastName": "Beesly", "title":"Receptionist", "managerId": 2, "city":"Scranton, PA", "cellPhone":"570-999-5555", "officePhone":"570-999-7474", "email":"pam@dundermifflin.com"},
@@ -48,6 +49,8 @@ var MemoryStore = function(successCallback, errorCallback) {
             {"id": 14, "firstName": "Kelly", "lastName": "Kapoor", "title":"Customer Service Rep.", "managerId": 2, "city":"Scranton, PA", "cellPhone":"570-123-9654", "officePhone":"570-125-3666", "email":"kelly@dundermifflin.com"},
             {"id": 15, "firstName": "Toby", "lastName": "Flenderson", "title":"Human Resources", "managerId": 1, "city":"Scranton, PA", "cellPhone":"570-485-8554", "officePhone":"570-699-5577", "email":"toby@dundermifflin.com"}
         ];
+
+    window.localStorage.setItem("employees", JSON.stringify(employees));
 
     callLater(successCallback);
 
