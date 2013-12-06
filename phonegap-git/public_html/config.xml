@@ -17,6 +17,8 @@
     </author>
     
     <icon src="img/icon.png" />
+    
+    <gap:platform name="android" />
  
  
  
