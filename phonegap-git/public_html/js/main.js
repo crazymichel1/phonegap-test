@@ -4,7 +4,7 @@ var app = {
         var self = this;
         this.detailsURL = /^#members\/(\d{1,})/;
         this.registerEvents();
-        this.store = new WebSqlStore(function() {
+        this.store = new MemoryStore(function() {
             self.route();
         });
     },
